@@ -29,6 +29,10 @@ body {
   text-align: center;
 }
 
+.profit_item > p {
+  padding-bottom: 10px;
+}
+
 .amount {
   /* outline: thin solid red; */
   text-align: center;
@@ -36,13 +40,18 @@ body {
 }
 
 .tap {
-  /* outline: thin solid red; */
   border-radius: 50%;
   height: 150px;
   width: 150px;
   background-color: cornflowerblue;
   border: none;
   cursor: pointer;
+}
+
+.tap:active {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
 }
 
 .menu {
