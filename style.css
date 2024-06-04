@@ -1,0 +1,50 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+}
+
+.user {
+  /* outline: thin solid red; */
+  text-align: center;
+  padding-top: 20px;
+}
+
+.profit {
+  /* outline: thin solid red; */
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+}
+
+.profit_item {
+  text-align: center;
+}
+
+.amount {
+  /* outline: thin solid red; */
+  text-align: center;
+  font-size: 28px;
+}
+
+.tap {
+  /* outline: thin solid red; */
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  background-color: cornflowerblue;
+}
+
+.menu {
+  /* outline: thin solid red; */
+  display: flex;
+  column-gap: 20px;
+  padding-bottom: 20px;
+}
