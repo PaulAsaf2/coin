@@ -9,7 +9,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
 }
 
 .user {
@@ -56,7 +56,44 @@ body {
 
 .menu {
   /* outline: thin solid red; */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   display: flex;
+  justify-content: center;
   column-gap: 20px;
   padding-bottom: 20px;
+}
+
+.menu_btn {
+  cursor: pointer;
+}
+
+.menu_btn_active {
+  color: lightgoldenrodyellow;
+}
+
+.menu_btn_3 {
+  cursor: default;
+  color: grey;
+}
+
+.menu2 {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+}
+
+.profit_container {
+  min-width: 200px;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.menu2_profit_item {
+  display: flex;
+  column-gap: 20px;
 }
