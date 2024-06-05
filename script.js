@@ -10,18 +10,64 @@ const menuBtn2 = document.querySelector('.menu_btn_2')
 const tg = window.Telegram.WebApp
 const coin = {
   amount: 0,
+  amountByTime: 0,
   inceaseByTap: 3,
   increaseByHour: 3600,
   increaseBySecond: 3600 / 3600,
   delayIncrease: 3600 / 3600 * 1000,
 }
 const energy = {
-  decrease: 1,
+  decrease: 3,
   current: 2000,
   total: 2000,
   increase: 3,
   increaseDelay: 1000,
 }
+
+// -------------------------------------
+// -------------------------------------
+// -------------------------------------
+// -------------------------------------
+// Функция, вызываемая перед закрытием окна браузера
+window.addEventListener('beforeunload', (event) => {
+  // Сохранение текущего времени
+  let currentTime = Date.now();
+  localStorage.setItem('lastTime', currentTime * 1000);
+});
+
+// Функция для проверки разницы во времени
+function checkTimeDifference() {
+  let unixTime = localStorage.getItem('lastTime')
+  let savedTime = new Date(unixTime / 1000)
+  
+  console.log(savedTime);
+
+  let currentUnitTime = Date.now()
+  let currentTime = new Date(currentUnitTime)
+
+  console.log(currentTime);
+
+  let difference = Math.floor((currentUnitTime - savedTime) / 1000)
+
+  console.log(difference);
+}
+
+// Функция, вызываемая при загрузке страницы
+document.addEventListener('DOMContentLoaded', checkTimeDifference);
+// -------------------------------------
+// -------------------------------------
+// -------------------------------------
+// -------------------------------------
+
+// tg.CloudStorage.setItem('coin', coin)
+// tg.CloudStorage.setItem('energy', energy)
+
+// tg.CloudStorage.removeItem('coin')
+// tg.CloudStorage.removeItem('amoint')
+
+tg.CloudStorage.getKeys((err, item) => {
+  console.log(item)
+});
 
 tg.expand()
 
@@ -46,16 +92,26 @@ energyEl.textContent = `${energy.current} / ${energy.total}`
 // Установить увеличение монет по времени
 increaseByTime.textContent = '+' + coin.increaseByHour
 // ------------------------
+// Установить значение монет
+// tg.CloudStorage.getItem('amount', (err, data) => {
+//   if (err) console.log(err)
+
+//   coin.amount = +data
+//   amount.textContent = coin.amount
+// })
+// ------------------------
 // Уменьшить энергию
 function energise() {
   energy.current -= energy.decrease
   energyEl.textContent = `${energy.current} / ${energy.total}`
 }
 // ------------------------
-// Увеличить сумму через клик
+// Увеличить монеты через клик
 function increaseCoinByTap() {
   coin.amount += coin.inceaseByTap
   amount.textContent = coin.amount
+
+  tg.CloudStorage.setItem('amount', coin.amount)
 
   energise()
 }
@@ -78,17 +134,23 @@ function increaseEnergy() {
 setInterval(increaseEnergy, energy.increaseDelay)
 
 // Увеличить монеты по времени
-function increaseCoinByTime() {
-  coin.amount += coin.increaseBySecond
-  amount.textContent = coin.amount
-}
+// function increaseCoinByTime() {
+  // coin.amount += coin.increaseBySecond
+  // amount.textContent = coin.amount
 
-setInterval(increaseCoinByTime, coin.delayIncrease)
+  // tg.CloudStorage.setItem('amount', coin.amount)
+
+  // let time = Date.now()
+
+  // localStorage.setItem('date', time)
+
+  // tg.CloudStorage.setItem('time', time)
+  // console.log('Time saved: ' + time);
+// }
+
+// setInterval(increaseCoinByTime, coin.delayIncrease)
 
 // Переключиться на меню 2
-
-// menuBtn1
-// menuBtn2
 
 menuBtn2.addEventListener('click', () => {
   main.style.display = 'none'
@@ -105,3 +167,4 @@ menuBtn1.addEventListener('click', () => {
   menuBtn2.classList.remove('menu_btn_active')
   menuBtn1.classList.add('menu_btn_active')
 })
+
